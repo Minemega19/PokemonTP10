@@ -1,8 +1,8 @@
 package TP7;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import Attaque.Attaque;
@@ -26,7 +26,10 @@ public class ChasseAuxPokemons {
 		 
 		final Joueur Adrien = new Joueur("Dupont", "Jean", 20, new Pokemon[5], new Item[15]);
 		final Joueur Louis = new Joueur("Martin", "Gabrielle", 18, new Pokemon[5], new Item[15]);
-				
+		final HashMap<String, Integer > mappePokedex; //car valeur numeric unique
+		try(FileReader lecteur = new FileReader("./pokedexComplet.txt")){
+			Scanner s = new Scanner(lecteur);
+		
 		System.out.println(piplup);
 		Adrien.capturer(piplup);
 		System.out.println(piplup);
@@ -67,35 +70,6 @@ public class ChasseAuxPokemons {
 		Adrien.modifierItem(0, 1);
 		System.out.println(Adrien.afficherSacItems());
 		
-		final ArrayList<Pokemon> pokemonList = new ArrayList<>();
-		try(FileReader lecteur = new FileReader("src/Panel/TP7/text.txt")){
-			Scanner s = new Scanner(lecteur);
-			while(s.hasNext()) {
-				String name = s.next();
-				String type = s.next();
-				int niveau = s.nextInt();
-				boolean diurne = s.nextBoolean();
-				int attaque = s.nextInt();
-				int defense = s.nextInt();
-				int attaqueSpeciale = s.nextInt();
-				int defenseSpeciale = s.nextInt();
-				ArrayList<Attaque> sesAttaques = new ArrayList<>();
-				String nomAttaque = s.next();
-				while(! nomAttaque.equals("END")) {
-					sesAttaques.add(mappeAttaques.get(nomAttaque).genAttaque());
-					nomAttaque = s.next();
-				}
-				Attaque[] sesAttaquesTableau = new Attaque[sesAttaques.size()];
-				for(int i = 0; i<sesAttaques.size(); i++) {
-					sesAttaquesTableau[i] = sesAttaques.get(i);
-				}
-				pokemonList.add(new Pokemon(name, type, niveau, diurne, attaque, defense, attaqueSpeciale, defenseSpeciale, sesAttaquesTableau));
-			}
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		
 		// Tests des ajouts originaux
 		/*final ItemVetement cape = new ItemVetement("Cape", 30, 5,"Bleu");
 		System.out.println(cape);
@@ -108,5 +82,7 @@ public class ChasseAuxPokemons {
 		final PlaqueAtk plaqueFeu = new PlaqueAtk("plaque feu", 30," feu");
 		rowlet.attribue(plaqueFeu);
 		rowlet.retirer();*/
+		}catch (Exception e) {
+		}
 	}
 }
