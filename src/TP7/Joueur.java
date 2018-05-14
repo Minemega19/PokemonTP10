@@ -10,6 +10,7 @@ public class Joueur {
 	private Pokemon[] mesPokemons;
 	private Nourriture[] caisseNourriture;
 	private Item[] sacItems;
+	private Pokedex pokedex;
 	
 	public Joueur (String nom, String prenom, int age, Pokemon mesPokemons[], Item[] sacItems) {
 		this.nom = nom;
@@ -18,6 +19,8 @@ public class Joueur {
 		this.mesPokemons = mesPokemons;
 		this.caisseNourriture = new Nourriture[10];
 		this.sacItems = new Item[15];
+		this.pokedex = new Pokedex();
+		this.rencontrer(this.mesPokemons);
 	}
 	
 	public boolean verifCaisse() {
@@ -117,6 +120,7 @@ public class Joueur {
 		
 		if(!regarde) {
 			System.out.println("Vous n'etes pas le maitre de ce pokemon !");
+			this.rencontrer(p);
 		}
 	}
 	
@@ -137,6 +141,7 @@ public class Joueur {
 		}
 		else {
 			System.out.println("Vous ne pouvez pas nourrir ce pokemon car il ne vous appartient pas.");
+			this.rencontrer(p);
 		}
 		System.out.println();
 	}
@@ -159,13 +164,14 @@ public class Joueur {
 		}
 		else {
 			System.out.println("Vous ne pouvez pas nommer ce pokemon puisque vous n'etes pas son maitre !");
+			this.rencontrer(p);
 		}
 	}
 	
 	public void capturer(Pokemon p) {
 		boolean capture = false;
 		int i = 0;
-		
+		this.rencontrer(p);
 		if (p.getMonJoueur() != null) {
 			System.out.println("Vous ne pouvez pas capturer un pokemon qui a deja un maitre.");
 		}
@@ -234,7 +240,7 @@ public class Joueur {
 	public void echanger(Pokemon p, Joueur autreJoueur, Pokemon autrePokemon) {
 		boolean echange = false;
 		int i = 0;
-		
+		this.rencontrer(autrePokemon);
 		while (!echange && i < this.mesPokemons.length) {
 			if (this.mesPokemons[i] == p) {
 				int j = 0;
@@ -333,5 +339,15 @@ public class Joueur {
 			System.out.println("Sac d'items vide.");
 		}
 		return contenus;
+	}
+
+	public Pokedex getPokedex() {
+		return pokedex;
+	}
+	public void rencontrer(Pokemon p ){
+		this.pokedex.rencontrer(p);
+	}
+	public void rencontrer(Pokemon[] pokemons){
+		this.rencontrer(pokemons);
 	}
 }

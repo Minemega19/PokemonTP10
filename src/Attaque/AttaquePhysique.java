@@ -11,9 +11,7 @@ public class AttaquePhysique extends Attaque {
 	public boolean estCompatible(Pokemon p) {
 		return true;
 	}
-	public AttaquePhysique() {
-		super("physique", new String[] {"EAU"}, 40, 100, 30);
-	}
+	
 	@Override
 	public void utiliser(Pokemon attaquant, Pokemon victime) {
 		// premierement on verifie si le score d'attaque de l'attaquant est superieur a la defence de la victime
@@ -32,11 +30,8 @@ public class AttaquePhysique extends Attaque {
 				System.out.println("Votre attaque n'a pas fonctionnée.");
 				this.baisseRepetitions();
 			}
-		}		
-	}
-	@Override
-	public AttaquePhysique genAttaque() {
-		return new AttaquePhysique();
+		}
+		
 	}
 
 }
