@@ -16,7 +16,9 @@ public class AttaqueSpeciale extends Attaque {
 		}
 		return false;
 	}
-	
+	public AttaqueSpeciale() {
+		super("speciale", new String[] {"FEU"}, 40, 100, 30);
+	}
 	@Override
 	public void utiliser(Pokemon attaquant, Pokemon victime) {
 		
@@ -46,6 +48,9 @@ public class AttaqueSpeciale extends Attaque {
 			}
 		}
 	}
-
+	@Override
+	public AttaqueSpeciale genAttaque() {
+		return new AttaqueSpeciale();
+	}
 
 }

@@ -17,7 +17,7 @@ public abstract class Attaque {
 		this.repetition = repetition;
 		this.repetitionRest=repetition;
 	}
-	
+	public abstract Attaque genAttaque();
 	public Attaque(String nom, int puissance, int precision, int repetition) {
 		this(nom, ALL_TYPES,puissance, precision, repetition);
 	}
