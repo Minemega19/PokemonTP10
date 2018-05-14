@@ -3,6 +3,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import Attaque.Attaque;
@@ -19,7 +21,9 @@ import Item.Item;
 public class ChasseAuxPokemons {
 
 	public static void main(String[] args) {
-
+		
+		final Map<String, Attaque> mappeAttaques = new HashMap<>();
+		mappeAttaques.put("bulle", new AttaqueBulle());
 		final Pokemon piplup = new Pokemon("Piplup", "EAU", 5, false, null, null, 51, 53, 61, 56, 0, 0, new ArrayList<Attaque>(Arrays.asList(new AttaqueTackle(), new AttaqueMorsure(), new AttaquePistoleEau(), new AttaqueEnfer())));
 		final Pokemon rowlet = new Pokemon("Rowlet", "PLANTE", 10, true, null, null, 55, 55, 50, 55, 0, 0, new ArrayList<Attaque>(Arrays.asList(new AttaqueMorsure(), new AttaqueFeinte(), new AttaqueTornadeFeuilles())));
 		final Pokemon totodile = new Pokemon("Totodile", "EAU", 8, false, null, null, 65, 64, 44, 48, 0, 0, new ArrayList<Attaque>(Arrays.asList(new AttaqueBulle(), new AttaqueCoupDeTete())));
