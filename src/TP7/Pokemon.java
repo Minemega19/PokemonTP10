@@ -6,6 +6,8 @@ import Attaque.Attaque;
 import Item.ItemEquipable;
 
 public class Pokemon {
+	
+	private int numeroPokedex; //pas de setteur car on ne veux pas modifier sa valeur 
 	private String nom;
 	private String type;
 	private int niveau;
@@ -24,11 +26,13 @@ public class Pokemon {
 	private ArrayList<Attaque> sesAttaques;
 	private ItemEquipable sonItem;
 	
-	public Pokemon (String nom, String type, int niveau, boolean diurne, int attack, int defense, int speAttack, int speDefense, int hp, int frequency, ArrayList<Attaque> sesAttaques) {
-		this(nom, type, niveau, diurne, null, null, attack, defense, speAttack, speDefense, 30, frequency, sesAttaques);
+
+
+	public Pokemon ( int numeroPokedex,String nom, String type, int niveau, boolean diurne, int attack, int defense, int speAttack, int speDefense, int hp, int frequency, ArrayList<Attaque> sesAttaques ) {
+		this(numeroPokedex,nom, type, niveau, diurne, null, null, attack, defense, speAttack, speDefense, 30, frequency, sesAttaques );
 	}
 	
-	public Pokemon (String nom, String type, int niveau, boolean diurne, String nomDonne, Joueur monJoueur, int attack, int defense, int speAttack, int speDefense, int hp, int frequency, ArrayList<Attaque> attaques) {
+	public Pokemon ( int numeroPokedex ,String nom, String type, int niveau, boolean diurne, String nomDonne, Joueur monJoueur, int attack, int defense, int speAttack, int speDefense, int hp, int frequency, ArrayList<Attaque> attaques ) {
 		this.nom=nom;
 		this.type=type;
 		this.niveau=niveau;
@@ -50,9 +54,10 @@ public class Pokemon {
 				this.addAttaque(attaques.get(i));
 			}
 		}
+		this.numeroPokedex = numeroPokedex;
 		
 	}
-	public Pokemon(String nom, String type, int niveau, boolean diurne, String nomDonne, Joueur monJoueur, int appetit, int satisfaction, int loyaute, int attack, int defense, int speAttack, int speDefense, int hp, int frequency, ArrayList<Attaque> sesAttaques, ItemEquipable sonItem) {
+	public Pokemon(String nom, String type, int niveau, boolean diurne, String nomDonne, Joueur monJoueur, int appetit, int satisfaction, int loyaute, int attack, int defense, int speAttack, int speDefense, int hp, int frequency, ArrayList<Attaque> sesAttaques, ItemEquipable sonItem , int numeroPokedex) {
 				super();
 				int i = 0;
 				this.nom = nom;
@@ -75,6 +80,7 @@ public class Pokemon {
 				}
 				
 				this.sonItem = sonItem;
+				this.numeroPokedex = numeroPokedex;
 	}
 	public int getAppetit () {
 		return this.appetit;
@@ -87,7 +93,9 @@ public class Pokemon {
 	public int getLoyaute () {
 		return this.loyaute;
 	}
-	
+	public int getNumeroPokedex() {
+		return numeroPokedex;
+	}
 	public void setAppetit (int appetit) {
 		this.appetit=appetit;
 	}

@@ -1,7 +1,9 @@
 package TP7;
 import java.io.FileReader;
-import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Scanner;
 
 import Attaque.Attaque;
 import Attaque.AttaqueBulle;
@@ -13,21 +15,21 @@ import Attaque.AttaquePistoleEau;
 import Attaque.AttaqueTackle;
 import Attaque.AttaqueTornadeFeuilles;
 import Item.Item;
-import Item.ItemEquipable;
 
 public class ChasseAuxPokemons {
 
 	public static void main(String[] args) {
-		
-		final Map<String, Attaque> mappeAttaques = new HashMap<>();
-		mappeAttaques.put("bulle", new AttaqueBulle());
+
 		final Pokemon piplup = new Pokemon("Piplup", "EAU", 5, false, null, null, 51, 53, 61, 56, 0, 0, new ArrayList<Attaque>(Arrays.asList(new AttaqueTackle(), new AttaqueMorsure(), new AttaquePistoleEau(), new AttaqueEnfer())));
 		final Pokemon rowlet = new Pokemon("Rowlet", "PLANTE", 10, true, null, null, 55, 55, 50, 55, 0, 0, new ArrayList<Attaque>(Arrays.asList(new AttaqueMorsure(), new AttaqueFeinte(), new AttaqueTornadeFeuilles())));
 		final Pokemon totodile = new Pokemon("Totodile", "EAU", 8, false, null, null, 65, 64, 44, 48, 0, 0, new ArrayList<Attaque>(Arrays.asList(new AttaqueBulle(), new AttaqueCoupDeTete())));
 		 
 		final Joueur Adrien = new Joueur("Dupont", "Jean", 20, new Pokemon[5], new Item[15]);
 		final Joueur Louis = new Joueur("Martin", "Gabrielle", 18, new Pokemon[5], new Item[15]);
-				
+		final HashMap<String, Integer > mappePokedex; //car valeur numeric unique
+		try(FileReader lecteur = new FileReader("./pokedexComplet.txt")){
+			Scanner s = new Scanner(lecteur);
+		
 		System.out.println(piplup);
 		Adrien.capturer(piplup);
 		System.out.println(piplup);
@@ -68,35 +70,6 @@ public class ChasseAuxPokemons {
 		Adrien.modifierItem(0, 1);
 		System.out.println(Adrien.afficherSacItems());
 		
-		final ArrayList<Pokemon> pokemonList = new ArrayList<>();
-		try(FileReader lecteur = new FileReader("src/TP7/text.txt")){
-			Scanner s = new Scanner(lecteur);
-			while(s.hasNext()) {
-				String name = s.next();
-				String type = s.next();
-				int niveau = s.nextInt();
-				boolean diurne = s.nextBoolean();
-				int attaque = s.nextInt();
-				int defense = s.nextInt();
-				int attaqueSpeciale = s.nextInt();
-				int defenseSpeciale = s.nextInt();
-				ArrayList<Attaque> sesAttaques = new ArrayList<>();
-				String nomAttaque = s.next();
-				while(! nomAttaque.equals("END")) {
-					sesAttaques.add(mappeAttaques.get(nomAttaque).genAttaque());
-					nomAttaque = s.next();
-				}
-				Attaque[] sesAttaquesTableau = new Attaque[sesAttaques.size()];
-				for(int i = 0; i<sesAttaques.size(); i++) {
-					sesAttaquesTableau[i] = sesAttaques.get(i);
-				}
-				//pokemonList.add(new Pokemon(nom, type, niveau, diurne, nomDonne, monJoueur, appetit, satisfaction, loyaute,attack,defense,speAttack,speDefense, hp,frequency,sesAttaques, sonItem));
-			}
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		
 		// Tests des ajouts originaux
 		/*final ItemVetement cape = new ItemVetement("Cape", 30, 5,"Bleu");
 		System.out.println(cape);
@@ -109,5 +82,7 @@ public class ChasseAuxPokemons {
 		final PlaqueAtk plaqueFeu = new PlaqueAtk("plaque feu", 30," feu");
 		rowlet.attribue(plaqueFeu);
 		rowlet.retirer();*/
+		}catch (Exception e) {
+		}
 	}
 }
