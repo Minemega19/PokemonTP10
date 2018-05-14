@@ -1,11 +1,7 @@
 package TP7;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 import Attaque.Attaque;
 import Attaque.AttaqueBulle;
@@ -17,6 +13,7 @@ import Attaque.AttaquePistoleEau;
 import Attaque.AttaqueTackle;
 import Attaque.AttaqueTornadeFeuilles;
 import Item.Item;
+import Item.ItemEquipable;
 
 public class ChasseAuxPokemons {
 
@@ -72,7 +69,7 @@ public class ChasseAuxPokemons {
 		System.out.println(Adrien.afficherSacItems());
 		
 		final ArrayList<Pokemon> pokemonList = new ArrayList<>();
-		try(FileReader lecteur = new FileReader("src/Panel/TP7/text.txt")){
+		try(FileReader lecteur = new FileReader("src/TP7/text.txt")){
 			Scanner s = new Scanner(lecteur);
 			while(s.hasNext()) {
 				String name = s.next();
@@ -93,7 +90,7 @@ public class ChasseAuxPokemons {
 				for(int i = 0; i<sesAttaques.size(); i++) {
 					sesAttaquesTableau[i] = sesAttaques.get(i);
 				}
-				pokemonList.add(new Pokemon(name, type, niveau, diurne, attaque, defense, attaqueSpeciale, defenseSpeciale, sesAttaquesTableau));
+				//pokemonList.add(new Pokemon(nom, type, niveau, diurne, nomDonne, monJoueur, appetit, satisfaction, loyaute,attack,defense,speAttack,speDefense, hp,frequency,sesAttaques, sonItem));
 			}
 		}
 		catch (IOException e) {
