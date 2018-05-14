@@ -1,6 +1,9 @@
 package TP7;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 import Attaque.Attaque;
 import Attaque.AttaqueBulle;
@@ -12,9 +15,6 @@ import Attaque.AttaquePistoleEau;
 import Attaque.AttaqueTackle;
 import Attaque.AttaqueTornadeFeuilles;
 import Item.Item;
-import Item.ItemEquipable;
-import Item.ItemVetement;
-import Plaque.PlaqueAtk;
 
 public class ChasseAuxPokemons {
 
@@ -66,6 +66,35 @@ public class ChasseAuxPokemons {
 		System.out.println(Adrien.afficherSacItems());
 		Adrien.modifierItem(0, 1);
 		System.out.println(Adrien.afficherSacItems());
+		
+		final ArrayList<Pokemon> pokemonList = new ArrayList<>();
+		try(FileReader lecteur = new FileReader("src/Panel/TP7/text.txt")){
+			Scanner s = new Scanner(lecteur);
+			while(s.hasNext()) {
+				String name = s.next();
+				String type = s.next();
+				int niveau = s.nextInt();
+				boolean diurne = s.nextBoolean();
+				int attaque = s.nextInt();
+				int defense = s.nextInt();
+				int attaqueSpeciale = s.nextInt();
+				int defenseSpeciale = s.nextInt();
+				ArrayList<Attaque> sesAttaques = new ArrayList<>();
+				String nomAttaque = s.next();
+				while(! nomAttaque.equals("END")) {
+					sesAttaques.add(mappeAttaques.get(nomAttaque).genAttaque());
+					nomAttaque = s.next();
+				}
+				Attaque[] sesAttaquesTableau = new Attaque[sesAttaques.size()];
+				for(int i = 0; i<sesAttaques.size(); i++) {
+					sesAttaquesTableau[i] = sesAttaques.get(i);
+				}
+				pokemonList.add(new Pokemon(name, type, niveau, diurne, attaque, defense, attaqueSpeciale, defenseSpeciale, sesAttaquesTableau));
+			}
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		// Tests des ajouts originaux
 		/*final ItemVetement cape = new ItemVetement("Cape", 30, 5,"Bleu");
