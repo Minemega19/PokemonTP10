@@ -97,6 +97,31 @@ public class ChasseAuxPokemons {
 			e.printStackTrace();
 		}
 		
+		
+		final Map<String, Integer> mappePokemons = new HashMap<>();
+		try(FileReader lecteur = new FileReader("pokedexComplet.txt")){
+			Scanner s = new Scanner(lecteur);
+			while(s.hasNext()) {
+				String name = s.next();
+				Integer numero= s.nextInt();
+				
+				while(! numero.equals("END")) {
+					mappePokemons.put(name, numero);
+					numero = s.nextInt();
+				}
+				//Attaque[] sesAttaquesTableau = new Attaque[sesAttaques.size()];
+				//for(int i = 0; i<sesAttaques.size(); i++) {
+				//	sesAttaquesTableau[i] = sesAttaques.get(i);
+				//}
+				//pokemonList.add(new Pokemon(name, type, niveau, diurne, attaque, defense, attaqueSpeciale, defenseSpeciale, sesAttaquesTableau));
+			}
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+			
+		}
 		// Tests des ajouts originaux
 		/*final ItemVetement cape = new ItemVetement("Cape", 30, 5,"Bleu");
 		System.out.println(cape);
